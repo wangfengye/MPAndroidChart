@@ -46,11 +46,14 @@ import com.xxmassdeveloper.mpchartexample.ScrollViewActivity;
 import com.xxmassdeveloper.mpchartexample.StackedBarActivity;
 import com.xxmassdeveloper.mpchartexample.StackedBarActivityNegative;
 import com.xxmassdeveloper.mpchartexample.fragments.SimpleChartDemo;
+import com.xxmassdeveloper.mpchartexample.myview.LineActivity;
 import com.xxmassdeveloper.mpchartexample.realm.RealmMainActivity;
 
 import java.util.ArrayList;
 
 public class MainActivity extends Activity implements OnItemClickListener {
+    // 新增的条目数量
+    private int mCounterWithMe =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +68,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         Utils.init(this);
 
         ArrayList<ContentItem> objects = new ArrayList<ContentItem>();
-
+        objects.add(ContentItem.createNew("Line Chart", "我的lineChart"));mCounterWithMe++;
         objects.add(new ContentItem("Line Chart", "A simple demonstration of the linechart."));
         objects.add(new ContentItem("Line Chart (Dual YAxis)",
                 "Demonstration of the linechart with dual y-axis."));
@@ -157,10 +160,14 @@ public class MainActivity extends Activity implements OnItemClickListener {
 
     @Override
     public void onItemClick(AdapterView<?> av, View v, int pos, long arg3) {
-
+        pos = pos - mCounterWithMe;
         Intent i;
 
         switch (pos) {
+            case -1:
+                i = new Intent(this, LineActivity.class);
+                startActivity(i);
+                break;
             case 0:
                 i = new Intent(this, LineChartActivity1.class);
                 startActivity(i);

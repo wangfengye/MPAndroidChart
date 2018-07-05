@@ -13,4 +13,9 @@ public class ContentItem {
         name = n;
         desc = d;
     }
+    public static ContentItem createNew(String n, String d){
+        ContentItem contentItem = new ContentItem(n,d);
+        contentItem.isNew = true;
+        return contentItem;
+    }
 }
